@@ -159,7 +159,7 @@ public class ScrGameManager : MonoBehaviour {
     //Soldier
     public void InstantiateSoldier()
     {
-        GameObject instance = Instantiate(soldier, new Vector3(0, -3.8f, 0), Quaternion.identity);
+        GameObject instance = Instantiate(soldier, new Vector3(0, -3.83f, 0), Quaternion.identity);
         instance.name = "Soldier";
     }
 

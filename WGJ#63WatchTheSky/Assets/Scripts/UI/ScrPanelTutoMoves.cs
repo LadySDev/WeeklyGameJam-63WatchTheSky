@@ -67,6 +67,7 @@ public class ScrPanelTutoMoves : MonoBehaviour {
 
     private void HidePanelTutoMoves()
     {
+        
         scrGM.ShowTxtMoney();
 
         scrGM.ShowPanelTutoCombat();

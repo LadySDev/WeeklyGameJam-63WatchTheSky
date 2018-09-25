@@ -42,6 +42,10 @@ public class ScrBtnTutoCombatNext : MonoBehaviour
 
             txtTutoCombat.text = "Buy a weapon by clicking on it";
 
+            iteration = 1;
+
+            gameObject.SetActive(false);
+
         }
 
     }
