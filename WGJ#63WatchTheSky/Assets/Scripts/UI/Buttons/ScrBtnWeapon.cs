@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class ScrBtnWeapon : MonoBehaviour {
 
     private string weaponName;
-
     private GameObject txtWeaponLevel;
-
     private Button btnWeapon;
 
     private bool isAlreadyBought;
@@ -17,6 +15,9 @@ public class ScrBtnWeapon : MonoBehaviour {
     private int cost;
 
     private ScrTxtMoney scrTxtMoney;
+
+    [SerializeField]
+    private GameObject alienShip;    
 
     private void Awake()
     {
@@ -30,17 +31,18 @@ public class ScrBtnWeapon : MonoBehaviour {
         GameObject.Find(strTxtWeaponCost).GetComponent<Text>().text = cost + " $";
 
         btnWeapon = gameObject.GetComponent<Button>();
-        btnWeapon.onClick.AddListener(Buy);
+        btnWeapon.onClick.AddListener(Event);
 
         isAlreadyBought = false;
 
         scrTxtMoney = GameObject.Find("TxtMoney").GetComponent< ScrTxtMoney>();
+                
     }
 
     // Use this for initialization
     void Start () {
-		
-	}
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -54,29 +56,41 @@ public class ScrBtnWeapon : MonoBehaviour {
 
 	}
 
-    private void Buy()
+    private void Event()
     {
+        
 
-        //spend money
-
-        string txtWeaponCost = "Txt" + weaponName + "Cost";
-        GameObject.Find(txtWeaponCost).SetActive(false);
-
-        txtWeaponLevel.SetActive(true);
-
-        btnWeapon.onClick.RemoveAllListeners();
-        btnWeapon.onClick.AddListener(TakeThisWeapon);
-
-        isAlreadyBought = true;
-
-        if (GameObject.Find("PanelTutoCombat"))
+        if (isAlreadyBought == false)
         {
-            GameObject.Find("ImgArrow").SetActive(false);
-            GameObject.Find("TxtTutoCombat").GetComponent<Text>().text = "As soon as an alien ship will appear, aim with the mouse and hold space to shoot";
 
-            Invoke("FirstShoot", 3);
+            //spend money
+
+            string txtWeaponCost = "Txt" + weaponName + "Cost";
+            GameObject.Find(txtWeaponCost).SetActive(false);
+
+            txtWeaponLevel.SetActive(true);
+
+            //btnWeapon.onClick.RemoveAllListeners();
+            //btnWeapon.onClick.RemoveListener(Event);
+            //btnWeapon.onClick.AddListener(TakeThisWeapon);
+
+            isAlreadyBought = true;
+
+            if (GameObject.Find("PanelTutoCombat"))
+            {
+                GameObject.Find("ImgArrow").SetActive(false);
+                GameObject.Find("TxtTutoCombat").GetComponent<Text>().text = "As soon as an alien ship will appear, aim with the mouse and hold space to shoot";
+
+                Invoke("FirstShoot", 3);
+
+            }
 
         }
+        else
+        {
+            TakeThisWeapon();
+        }
+        
 
     }
 
@@ -89,8 +103,22 @@ public class ScrBtnWeapon : MonoBehaviour {
     {
         GameObject.Find("PanelTutoCombat").SetActive(false);
 
-        //soldier set current weapon
+        GameObject[] objScene = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject child in objScene)
+        {
+            if (child.name == "Trajectory")
+            {
+                child.SetActive(true);
+            }
 
+        }
+
+        GameObject instanceAlienShip = Instantiate(alienShip);
+        instanceAlienShip.transform.position = new Vector3(0, 3.84f, 0);
+
+        GameObject soldier = GameObject.Find("Soldier");
+       
+        soldier.GetComponent<ScrSoldierCombat>().SetCurrentWeapon(1);
     }
 
 }

@@ -6,6 +6,8 @@ public class ScrGameManager : MonoBehaviour {
 
     [SerializeField]
     private GameObject soldier;
+    [SerializeField]
+    private GameObject trajectory;
 
     private void SetResolutionsSettings()
     {
@@ -159,8 +161,16 @@ public class ScrGameManager : MonoBehaviour {
     //Soldier
     public void InstantiateSoldier()
     {
-        GameObject instance = Instantiate(soldier, new Vector3(0, -3.83f, 0), Quaternion.identity);
-        instance.name = "Soldier";
+        GameObject instanceSoldier = Instantiate(soldier, new Vector3(0, -3.83f, 0), Quaternion.identity);
+        instanceSoldier.name = "Soldier";
+
+        GameObject instanceTrajectory = Instantiate(trajectory, instanceSoldier.transform);        
+        instanceTrajectory.name = "Trajectory";
+
+        instanceTrajectory.GetComponent<LineRenderer>().SetPosition(0, new Vector3(instanceSoldier.transform.position.x, instanceSoldier.transform.position.y + 0.5f, instanceSoldier.transform.position.z));
+        instanceTrajectory.GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 3.84f, 0));
+        
+        instanceTrajectory.SetActive(false);
     }
 
 }
