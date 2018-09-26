@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 61685550888782048}
   - component: {fileID: 114390740192596342}
   - component: {fileID: 114523489460962370}
+  - component: {fileID: 114488697308628924}
   m_Layer: 0
   m_Name: AlienShip
   m_TagString: AlienShip
@@ -104,6 +105,18 @@ MonoBehaviour:
     type: 2}
   healthMax: 100
   health: 100
+--- !u!114 &114488697308628924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1557926915616572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d4a44abc21d4f42941bd4538b47204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
 --- !u!114 &114523489460962370
 MonoBehaviour:
   m_ObjectHideFlags: 1
