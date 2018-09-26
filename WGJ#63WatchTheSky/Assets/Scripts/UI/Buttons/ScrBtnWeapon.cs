@@ -69,11 +69,7 @@ public class ScrBtnWeapon : MonoBehaviour {
             GameObject.Find(txtWeaponCost).SetActive(false);
 
             txtWeaponLevel.SetActive(true);
-
-            //btnWeapon.onClick.RemoveAllListeners();
-            //btnWeapon.onClick.RemoveListener(Event);
-            //btnWeapon.onClick.AddListener(TakeThisWeapon);
-
+            
             isAlreadyBought = true;
 
             if (GameObject.Find("PanelTutoCombat"))
@@ -114,7 +110,7 @@ public class ScrBtnWeapon : MonoBehaviour {
         }
 
         GameObject instanceAlienShip = Instantiate(alienShip);
-        instanceAlienShip.transform.position = new Vector3(0, 3.84f, 0);
+        instanceAlienShip.transform.position = new Vector3(0, 5.5f, 0);
 
         GameObject soldier = GameObject.Find("Soldier");
        

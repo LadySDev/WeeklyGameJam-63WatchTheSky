@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4940220381393212}
   - component: {fileID: 120717680620483106}
+  - component: {fileID: 114823738084595998}
   m_Layer: 0
   m_Name: Trajectory
   m_TagString: Untagged
@@ -40,6 +41,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114823738084595998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745091306321894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60473b8ac1db7694c89c490b33070274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &120717680620483106
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -79,7 +91,7 @@ LineRenderer:
   - {x: 0, y: 7.68, z: 0}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.05
+    widthMultiplier: 0.02
     widthCurve:
       serializedVersion: 2
       m_Curve:

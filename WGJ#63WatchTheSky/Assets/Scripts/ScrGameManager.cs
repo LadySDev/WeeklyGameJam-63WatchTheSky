@@ -9,6 +9,8 @@ public class ScrGameManager : MonoBehaviour {
     [SerializeField]
     private GameObject trajectory;
 
+    private bool isPlayerLose;
+
     private void SetResolutionsSettings()
     {
         Screen.SetResolution(800, 600, false);
@@ -34,11 +36,17 @@ public class ScrGameManager : MonoBehaviour {
 
         HidePanelShop();
 
+        isPlayerLose = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+        if (isPlayerLose == true)
+        {
+            Lose();
+        }
+
 	}
 
     //Tuto Moves
@@ -171,6 +179,16 @@ public class ScrGameManager : MonoBehaviour {
         instanceTrajectory.GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 3.84f, 0));
         
         instanceTrajectory.SetActive(false);
+    }
+
+    private void Lose()
+    {
+        print("You Lose!");
+    }
+
+    public void SetIsPlayerLose(bool isLose)
+    {
+        isPlayerLose = isLose;
     }
 
 }
