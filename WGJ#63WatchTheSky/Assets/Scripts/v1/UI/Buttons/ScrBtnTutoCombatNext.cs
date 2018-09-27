@@ -38,7 +38,8 @@ public class ScrBtnTutoCombatNext : MonoBehaviour
         {
             scrGM.ShowPanelShop();
                         
-            imgArrow.GetComponent<RectTransform>().localPosition = new Vector3(250, -205, 0);
+            imgArrow.transform.localPosition = new Vector3(250, -205, 0);
+            imgArrow.transform.rotation = Quaternion.Euler(0, 0, 90);
 
             txtTutoCombat.text = "Buy a weapon by clicking on it";
 

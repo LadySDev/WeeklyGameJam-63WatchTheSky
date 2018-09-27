@@ -17,7 +17,9 @@ public class ScrBtnWeapon : MonoBehaviour {
     private ScrTxtMoney scrTxtMoney;
 
     [SerializeField]
-    private GameObject alienShip;    
+    private GameObject alienShip;
+
+    private bool isFightStarted;
 
     private void Awake()
     {
@@ -36,7 +38,8 @@ public class ScrBtnWeapon : MonoBehaviour {
         isAlreadyBought = false;
 
         scrTxtMoney = GameObject.Find("TxtMoney").GetComponent< ScrTxtMoney>();
-                
+
+        isFightStarted = false;
     }
 
     // Use this for initialization
@@ -54,6 +57,16 @@ public class ScrBtnWeapon : MonoBehaviour {
             btnWeapon.interactable = false;
         }
 
+        if (isFightStarted == true) {
+            if (GameObject.Find("Soldier") == null)
+            {
+                GameObject.Find("GameManager").GetComponent<ScrGameManager>().SetIsPlayerLose(true);
+            }
+            else if (GameObject.Find("Alien") == null)
+            {
+                GameObject.Find("GameManager").GetComponent<ScrGameManager>().SetIsPlayerWin(true);
+            }
+        }
 	}
 
     private void Event()
@@ -63,7 +76,7 @@ public class ScrBtnWeapon : MonoBehaviour {
         if (isAlreadyBought == false)
         {
 
-            //spend money
+            GameObject.Find("TxtMoney").GetComponent<ScrTxtMoney>().SetMoney(0);
 
             string txtWeaponCost = "Txt" + weaponName + "Cost";
             GameObject.Find(txtWeaponCost).SetActive(false);
@@ -92,7 +105,7 @@ public class ScrBtnWeapon : MonoBehaviour {
 
     private void TakeThisWeapon()
     {
-        print("take this");
+        //print("take this");
     }
 
     private void FirstShoot()
@@ -111,10 +124,13 @@ public class ScrBtnWeapon : MonoBehaviour {
 
         GameObject instanceAlienShip = Instantiate(alienShip);
         instanceAlienShip.transform.position = new Vector3(0, 5.5f, 0);
+        instanceAlienShip.name = "Alien";
 
         GameObject soldier = GameObject.Find("Soldier");
        
         soldier.GetComponent<ScrSoldierCombat>().SetCurrentWeapon(1);
+
+        isFightStarted = true;
     }
 
 }

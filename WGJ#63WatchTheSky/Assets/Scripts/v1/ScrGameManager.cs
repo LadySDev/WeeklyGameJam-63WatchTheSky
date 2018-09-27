@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScrGameManager : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class ScrGameManager : MonoBehaviour {
     private GameObject trajectory;
 
     private bool isPlayerLose;
+    private bool isPlayerWin;
 
     private void SetResolutionsSettings()
     {
@@ -37,6 +39,7 @@ public class ScrGameManager : MonoBehaviour {
         HidePanelShop();
 
         isPlayerLose = false;
+        isPlayerWin = false;
     }
 	
 	// Update is called once per frame
@@ -47,7 +50,12 @@ public class ScrGameManager : MonoBehaviour {
             Lose();
         }
 
-	}
+        if (isPlayerWin == true)
+        {
+            Win();
+        }
+
+    }
 
     //Tuto Moves
     public void ShowPanelTutoMoves()
@@ -183,12 +191,30 @@ public class ScrGameManager : MonoBehaviour {
 
     private void Lose()
     {
-        print("You Lose!");
+        ShowPanelMenu();
+        GameObject.Find("TextResult").GetComponent<Text>().text = "You Lose !";
+       
+
+        isPlayerLose = false;
     }
 
     public void SetIsPlayerLose(bool isLose)
     {
         isPlayerLose = isLose;
+    }
+
+    public void SetIsPlayerWin(bool isWin)
+    {
+        isPlayerWin = isWin;
+    }
+
+    private void Win()
+    {
+        ShowPanelMenu();
+        GameObject.Find("TextResult").GetComponent<Text>().text = "You Win !";
+       
+
+        isPlayerWin = false;
     }
 
 }

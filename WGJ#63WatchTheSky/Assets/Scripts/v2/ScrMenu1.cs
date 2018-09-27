@@ -10,6 +10,8 @@ public class ScrMenu1 : MonoBehaviour {
     private Font font;
 
     private GameObject panelMenu;
+    private GameObject btnTutorial;
+    private GameObject btnPlay;
 
     // Sprite Button Getter Setter
     public Sprite SpriteButton
@@ -42,56 +44,70 @@ public class ScrMenu1 : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        //Panel
+        InitPanelMenu();
+        
+        InitButtonTutorial();
+       
+        InitTextButtonTutorial();
+        
+        InitButtonPlay();
+        
+        InitTextButtonPlay();
+        
+    }
+        
+    private void InitPanelMenu()
+    {
         panelMenu = new GameObject("PanelMenu1");
         panelMenu.transform.parent = GameObject.Find("Canvas").transform;
         panelMenu.transform.localPosition = new Vector3(0, 0, 0);
+    }
 
+    private void InitButtonTutorial()
+    {
+        btnTutorial = new GameObject("BtnTuto");
+        btnTutorial.transform.parent = panelMenu.transform;
+        btnTutorial.transform.localPosition = new Vector3(0, 20, 0);
 
+        RectTransform rtBtnTutorial = btnTutorial.AddComponent<RectTransform>();
+        rtBtnTutorial.sizeDelta = new Vector2(160, 30);
 
-        //Button Launch Tuto
-        GameObject btnTuto = new GameObject("BtnTuto");
-        btnTuto.transform.parent = panelMenu.transform;
+        btnTutorial.AddComponent<CanvasRenderer>();
 
-        RectTransform rtBtnTuto = btnTuto.AddComponent<RectTransform>();
-        rtBtnTuto.transform.localPosition = new Vector3(0, 20, 0);
-        rtBtnTuto.sizeDelta = new Vector2(160, 30);
+        Image imgBtnTutorial = btnTutorial.AddComponent<Image>();
+        imgBtnTutorial.sprite = SpriteButton;
+        imgBtnTutorial.type = Image.Type.Sliced;
 
-        btnTuto.AddComponent<CanvasRenderer>();
+        Button btnBtnTutorial = btnTutorial.AddComponent<Button>();
+        btnBtnTutorial.onClick.AddListener(LaunchTutorial);
+    }
 
-        Image imgBtnTuto = btnTuto.AddComponent<Image>();
-        imgBtnTuto.sprite = SpriteButton;
-        imgBtnTuto.type = Image.Type.Sliced;
+    private void InitTextButtonTutorial()
+    {
+        GameObject txtBtnTutorial = new GameObject("TxtBtnSpeech");
+        txtBtnTutorial.transform.parent = btnTutorial.transform;
+        txtBtnTutorial.transform.localPosition = new Vector3(0, 0, 0);
 
-        Button btnBtnTuto = btnTuto.AddComponent<Button>();
-        btnBtnTuto.onClick.AddListener(LaunchTutorial);
+        RectTransform rtTxtBtnTutorial = txtBtnTutorial.AddComponent<RectTransform>();
+        rtTxtBtnTutorial.sizeDelta = new Vector2(160, 30);
 
-        //Button Text Launch Tuto
-        GameObject txtBtnTuto = new GameObject("TxtBtnSpeech");
-        txtBtnTuto.transform.parent = btnTuto.transform;
+        txtBtnTutorial.AddComponent<CanvasRenderer>();
 
-        RectTransform rtBtnTutoTxt = txtBtnTuto.AddComponent<RectTransform>();
-        rtBtnTutoTxt.transform.localPosition = new Vector3(0, 0, 0);
-        rtBtnTutoTxt.sizeDelta = new Vector2(160, 30);
+        Text txtTxtBtnTutorial = txtBtnTutorial.AddComponent<Text>();
+        txtTxtBtnTutorial.text = "Tutorial";
+        txtTxtBtnTutorial.font = font;
+        txtTxtBtnTutorial.fontSize = 25;
+        txtTxtBtnTutorial.alignment = TextAnchor.MiddleCenter;
+        txtTxtBtnTutorial.color = Color.black;
+    }
 
-        txtBtnTuto.AddComponent<CanvasRenderer>();
-
-        Text txtBtnTutoTxt = txtBtnTuto.AddComponent<Text>();
-        txtBtnTutoTxt.text = "Tutorial";
-        txtBtnTutoTxt.font = font;
-        txtBtnTutoTxt.fontSize = 20;
-        txtBtnTutoTxt.alignment = TextAnchor.MiddleCenter;
-        txtBtnTutoTxt.color = Color.black;
-
-
-
-
-        //Button Launch Play
-        GameObject btnPlay = new GameObject("BtnPlay");
+    private void InitButtonPlay()
+    {
+        btnPlay = new GameObject("BtnPlay");
         btnPlay.transform.parent = panelMenu.transform;
+        btnPlay.transform.localPosition = new Vector3(0, -20, 0);
 
         RectTransform rtBtnPlay = btnPlay.AddComponent<RectTransform>();
-        rtBtnPlay.transform.localPosition = new Vector3(0, -20, 0);
         rtBtnPlay.sizeDelta = new Vector2(160, 30);
 
         btnPlay.AddComponent<CanvasRenderer>();
@@ -102,26 +118,27 @@ public class ScrMenu1 : MonoBehaviour {
 
         Button btnBtnPlay = btnPlay.AddComponent<Button>();
         btnBtnPlay.onClick.AddListener(LaunchGame);
+    }
 
-        //Button Text Launch Tuto
+    private void InitTextButtonPlay()
+    {
         GameObject txtBtnPlay = new GameObject("TxtBtnSpeech");
         txtBtnPlay.transform.parent = btnPlay.transform;
+        txtBtnPlay.transform.localPosition = new Vector3(0, 0, 0);
 
-        RectTransform rtBtnPlayTxt = txtBtnPlay.AddComponent<RectTransform>();
-        rtBtnPlayTxt.transform.localPosition = new Vector3(0, 0, 0);
-        rtBtnPlayTxt.sizeDelta = new Vector2(160, 30);
+        RectTransform rtTxtBtnPlay = txtBtnPlay.AddComponent<RectTransform>();
+        rtTxtBtnPlay.sizeDelta = new Vector2(160, 30);
 
         txtBtnPlay.AddComponent<CanvasRenderer>();
 
-        Text txtBtnPlayTxt = txtBtnPlay.AddComponent<Text>();
-        txtBtnPlayTxt.text = "Play";
-        txtBtnPlayTxt.font = font;
-        txtBtnPlayTxt.fontSize = 20;
-        txtBtnPlayTxt.alignment = TextAnchor.MiddleCenter;
-        txtBtnPlayTxt.color = Color.black;
-
+        Text txtTxtBtnPlay = txtBtnPlay.AddComponent<Text>();
+        txtTxtBtnPlay.text = "Play";
+        txtTxtBtnPlay.font = font;
+        txtTxtBtnPlay.fontSize = 25;
+        txtTxtBtnPlay.alignment = TextAnchor.MiddleCenter;
+        txtTxtBtnPlay.color = Color.black;
     }
-        
+
     private void LaunchTutorial()
     {
         gameObject.GetComponent<ScrGameManager2>().LaunchTutorial();

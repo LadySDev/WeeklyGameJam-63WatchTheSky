@@ -10,6 +10,51 @@ public class ScrGameManager2 : MonoBehaviour {
     [SerializeField]
     private Font font;
 
+    [SerializeField]
+    private float screenPosXMin;
+    [SerializeField]
+    private float screenPosXMax;
+
+    [SerializeField]
+    private GameObject soldier;
+
+    [SerializeField]
+    private float soldierPosY;
+
+    [SerializeField]
+    private Sprite arrow;
+
+    [SerializeField]
+    private GameObject alien;
+
+    //screenPosXMin Getter Setter
+    public float ScreenPosXMin
+    {
+        get
+        {
+            return screenPosXMin;
+        }
+
+        set
+        {
+            screenPosXMin = value;
+        }
+    }
+
+    //screenPosXMax Getter Setter
+    public float ScreenPosXMax
+    {
+        get
+        {
+            return screenPosXMax;
+        }
+
+        set
+        {
+            screenPosXMax = value;
+        }
+    }
+
     // Use this for initialization
     void Start () {
 
@@ -38,7 +83,13 @@ public class ScrGameManager2 : MonoBehaviour {
 
     public void LaunchTutorial()
     {
-        print("Launch tutorial");
+        ScrTutorial scrTutorial = gameObject.AddComponent<ScrTutorial>();
+        scrTutorial.SpriteButton = spriteButton;
+        scrTutorial.Font = font;
+        scrTutorial.Soldier = soldier;
+        scrTutorial.SoldierPosY = soldierPosY;
+        scrTutorial.Arrow = arrow;
+        scrTutorial.Alien = alien;
     }
 
     public void LaunchGame()
